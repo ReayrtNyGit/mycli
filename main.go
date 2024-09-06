@@ -23,8 +23,6 @@ func main() {
 		return
 	}
 
-	// Use the flag value in the program to greet the user.
-	fmt.Printf("Hello, %s!\n", *name)
 	// Retrieve the API key from the environment variable
 	apiKey := os.Getenv("OPENAI_API_KEY")
 	if apiKey == "" {
