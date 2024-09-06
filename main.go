@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"os"
 	"io/ioutil"
 	"net/http"
 	"fmt"
@@ -13,13 +14,16 @@ func main() {
 	// Define a string flag with a default value and a short description.
 	name := flag.String("name", "World", "a name to say hello to")
 
-	// Define a string flag for the API key.
-	apiKey := flag.String("apikey", "", "API key for authentication")
 	flag.Parse()
 
 	// Use the flag value in the program.
 	fmt.Printf("Hello, %s!\n", *name)
-	// Make an API request
+	// Retrieve the API key from the environment variable
+	apiKey := os.Getenv("OPENAI_API_KEY")
+	if apiKey == "" {
+		fmt.Println("Error: OPENAI_API_KEY environment variable is not set.")
+		return
+	}
 	url := "https://api.openai.com/v1/chat/completions"
 	reqBody := []byte(`{
 		"model": "gpt-4o-mini",
