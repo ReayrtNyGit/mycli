@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"flag"
-	"fmt"
 	"os"
 	"io/ioutil"
 	"net/http"
@@ -16,7 +15,7 @@ func main() {
 
 	flag.Parse()
 
-	// Use the flag value in the program.
+	// Use the flag value in the program to greet the user.
 	fmt.Printf("Hello, %s!\n", *name)
 	// Retrieve the API key from the environment variable
 	apiKey := os.Getenv("OPENAI_API_KEY")
