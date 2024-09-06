@@ -6,6 +6,7 @@ import (
 	"os"
 	"io/ioutil"
 	"net/http"
+	"encoding/json"
 	"fmt"
 )
 
@@ -60,5 +61,22 @@ func main() {
 		return
 	}
 
-	fmt.Println("Response:", string(body))
+	var response map[string]interface{}
+	if err := json.Unmarshal(body, &response); err != nil {
+		fmt.Println("Error parsing response:", err)
+		return
+	}
+
+	if choices, ok := response["choices"].([]interface{}); ok && len(choices) > 0 {
+		if choice, ok := choices[0].(map[string]interface{}); ok {
+			if message, ok := choice["message"].(map[string]interface{}); ok {
+				if content, ok := message["content"].(string); ok {
+					fmt.Println("Response content:", content)
+					return
+				}
+			}
+		}
+	}
+
+	fmt.Println("Error: Unexpected response format.")
 }
