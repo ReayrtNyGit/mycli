@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// Define a string flag with a default value and a short description.
-	name := flag.String("name", "World", "a name to say hello to")
+	name := flag.String("name", "Example of some text", "a name to say hello to")
 	model := flag.String("model", "gpt-4o-mini", "the model to use (gpt-4o-mini or gpt-4o)")
 
 	flag.Parse()
