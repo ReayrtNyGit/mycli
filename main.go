@@ -33,7 +33,7 @@ func main() {
 	url := "https://api.openai.com/v1/chat/completions"
 	reqBody := []byte(`{
 		"model": "` + *model + `",
-		"messages": [{"role": "user", "content": "Say this is a test!"}],
+		"messages": [{"role": "user", "content": "` + *name + `"}],
 		"temperature": 0.7
 	}`)
 
