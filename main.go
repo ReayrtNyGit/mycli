@@ -13,7 +13,16 @@ func main() {
 	// Define a string flag with a default value and a short description.
 	name := flag.String("name", "World", "a name to say hello to")
 
+	// Define a string flag for the model with a default value and a short description.
+	model := flag.String("model", "gpt-4o-mini", "the model to use (gpt-4o-mini or gpt-4o)")
+
 	flag.Parse()
+
+	// Validate the model choice
+	if *model != "gpt-4o-mini" && *model != "gpt-4o" {
+		fmt.Println("Error: Invalid model choice. Use 'gpt-4o-mini' or 'gpt-4o'.")
+		return
+	}
 
 	// Use the flag value in the program to greet the user.
 	fmt.Printf("Hello, %s!\n", *name)
@@ -25,7 +34,7 @@ func main() {
 	}
 	url := "https://api.openai.com/v1/chat/completions"
 	reqBody := []byte(`{
-		"model": "gpt-4o-mini",
+		"model": "` + *model + `",
 		"messages": [{"role": "user", "content": "Say this is a test!"}],
 		"temperature": 0.7
 	}`)
