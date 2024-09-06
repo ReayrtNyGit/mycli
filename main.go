@@ -12,7 +12,7 @@ import (
 
 func main() {
 	// Define a string flag with a default value and a short description.
-	name := flag.String("name", "Example of some text", "a name to say hello to")
+	request := flag.String("request", "Example of some text", "a request to send")
 	model := flag.String("model", "gpt-4o-mini", "the model to use (gpt-4o-mini or gpt-4o)")
 
 	flag.Parse()
@@ -32,7 +32,7 @@ func main() {
 	url := "https://api.openai.com/v1/chat/completions"
 	reqBody := []byte(`{
 		"model": "` + *model + `",
-		"messages": [{"role": "user", "content": "` + *name + `"}],
+		"messages": [{"role": "user", "content": "` + *request + `"}],
 		"temperature": 0.7
 	}`)
 
